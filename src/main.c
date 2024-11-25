@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h> // usleep için
+#include "RotateCube.h"
 #include "SensorFusion.h"
 
 int main() {
@@ -13,22 +15,25 @@ int main() {
     float gyro[3], accel[3], mag[3];
     float roll = 0, pitch = 0, yaw = 0;
 
-    // Skip the header line
+    // Başlık satırını atla
     fgets(line, sizeof(line), file);
 
-    // Read the data line by line
+    // Veri satırlarını okuyarak işleme başla
     while (fgets(line, sizeof(line), file)) {
-        // Parse the line
+        // Satırı ayrıştır
         sscanf(line, "%f,%f,%f,%f,%f,%f,%f,%f,%f",
                &gyro[0], &gyro[1], &gyro[2],
                &accel[0], &accel[1], &accel[2],
                &mag[0], &mag[1], &mag[2]);
 
-        // Calculate roll, pitch, and yaw
+        // Roll, pitch ve yaw hesapla
         calculate_roll_pitch_yaw(accel, gyro, mag, &roll, &pitch, &yaw);
 
-        // Print the results
-        printf("Roll: %.2f, Pitch: %.2f, Yaw: %.2f\n", roll, pitch, yaw);
+        // Ekranda roll, pitch ve yaw değerlerini göster
+        rotate_cube(roll, pitch, yaw);
+
+        // Bekleme süresi (100 ms)
+        usleep(100000);
     }
 
     fclose(file);

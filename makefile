@@ -5,26 +5,29 @@ CC = gcc
 CFLAGS = -Iinclude -lm
 
 # Source files and object files
-SRCS = src/main.c src/SensorFusion.c
-OBJS = $(SRCS:.c=.o)
+SRCS = $(wildcard src/*.c)
+OBJS = $(SRCS:src/%.c=obj/%.o)
 
 # Output executable
-TARGET = ./Debug/SensorFusion
+TARGET = Debug/SensorFusion
 
 # Default target
 all: $(TARGET)
 
 # Linking step
 $(TARGET): $(OBJS)
+	@mkdir -p Debug
 	$(CC) $(OBJS) -o $(TARGET) $(CFLAGS)
 
 # Compile source files to object files
-%.o: %.c
+obj/%.o: src/%.c
+	@mkdir -p obj
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 # Clean up build files
 clean:
 	rm -f $(OBJS) $(TARGET)
+	rm -rf Debug obj
 
 # Run the program
 run: all
