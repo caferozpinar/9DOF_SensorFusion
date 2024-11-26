@@ -13,11 +13,11 @@ int main() {
 
     char line[256];
     float gyro[3], accel[3], mag[3];
-    float roll = 0, pitch = 0, yaw = 0;
+    CubeRotation rotation = {0.0f, 0.0f, 0.0f};
 
-    // Başlık satırını atla
-    fgets(line, sizeof(line), file);
-
+    int argc = 1;
+    char *argv[1] = {(char *)"OpenGL"};
+    init_rotate_cube(argc, argv, &rotation);
     // Veri satırlarını okuyarak işleme başla
     while (fgets(line, sizeof(line), file)) {
         // Satırı ayrıştır
@@ -27,13 +27,16 @@ int main() {
                &mag[0], &mag[1], &mag[2]);
 
         // Roll, pitch ve yaw hesapla
-        calculate_roll_pitch_yaw(accel, gyro, mag, &roll, &pitch, &yaw);
+        calculate_roll_pitch_yaw(accel, gyro, mag, &rotation.roll, &rotation.pitch, &rotation.yaw);
 
-        // Ekranda roll, pitch ve yaw değerlerini göster
-        rotate_cube(roll, pitch, yaw);
+        // Roll, pitch, yaw değerlerini yazdır
+        printf("Roll: %.2f, Pitch: %.2f, Yaw: %.2f\n", rotation.roll, rotation.pitch, rotation.yaw);
+
+        // Roll, pitch ve yaw değerlerini güncelle
+        update_rotation(rotation);
 
         // Bekleme süresi (100 ms)
-        usleep(100000);
+        usleep(10000);
     }
 
     fclose(file);

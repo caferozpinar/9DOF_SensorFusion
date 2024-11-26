@@ -1,11 +1,15 @@
 #ifndef ROTATECUBE_H
 #define ROTATECUBE_H
 
-// Ekran boyutları
-#define WIDTH 40
-#define HEIGHT 20
+// Roll, pitch ve yaw değerlerine göre küpü döndüren ve OpenGL ayarlarını başlatan fonksiyonlar
+typedef struct {
+    float roll;
+    float pitch;
+    float yaw;
+} CubeRotation;
 
-// Fonksiyon prototipi
-void rotate_cube(float roll, float pitch, float yaw);
+void init_rotate_cube(int argc, char** argv, CubeRotation *rotation);
+void update_rotation(CubeRotation rotation);
+void rotate_cube(CubeRotation rotation);
 
 #endif // ROTATECUBE_H

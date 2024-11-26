@@ -2,7 +2,8 @@
 CC = gcc
 
 # Flags
-CFLAGS = -Iinclude -lm
+CFLAGS = -Iinclude
+LDFLAGS = -lGL -lGLU -lglut -lm -lpthread
 
 # Source files and object files
 SRCS = $(wildcard src/*.c)
@@ -17,7 +18,7 @@ all: $(TARGET)
 # Linking step
 $(TARGET): $(OBJS)
 	@mkdir -p Debug
-	$(CC) $(OBJS) -o $(TARGET) $(CFLAGS)
+	$(CC) $(OBJS) -o $(TARGET) $(LDFLAGS)
 
 # Compile source files to object files
 obj/%.o: src/%.c
