@@ -5,7 +5,7 @@
 #include "SensorFusion.h"
 
 int main() {
-    FILE *file = fopen("./Data/SensorDatas.csv", "r");
+    FILE *file = fopen("./Data/SensorDataSample_2.csv", "r");
     if (file == NULL) {
         printf("Error: Unable to open the file.\n");
         return 1;
