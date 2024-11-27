@@ -69,9 +69,9 @@ void rotate_cube(CubeRotation rotation) {
     glTranslatef(0.0f, 0.0f, 0.0f); // Cismin merkezini sıfır noktasına getir
 
     // Roll, pitch, yaw değerlerine göre cismin merkez etrafında döndür
-    glRotatef(rotation.pitch, 1.0f, 0.0f, 0.0f);  // X ekseni etrafında (Roll)
-    glRotatef(rotation.yaw, 0.0f, 1.0f, 0.0f); // Y ekseni etrafında (Pitch)
-    glRotatef(rotation.roll, 0.0f, 0.0f, 1.0f);   // Z ekseni etrafında (Yaw)
+    glRotatef(rotation.pitch, -1.0f, 0.0f, 0.0f);  // X ekseni etrafında (pitch)
+    glRotatef(rotation.yaw, 0.0f, 1.0f, 0.0f); // Y ekseni etrafında (yaw)
+    glRotatef(rotation.roll, 0.0f, 0.0f, 1.0f);   // Z ekseni etrafında (roll)
 
     // Cismi orijinal konumuna geri getir
     glTranslatef(0.0f, 0.0f, 0.0f);

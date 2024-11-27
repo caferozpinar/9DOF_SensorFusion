@@ -1,5 +1,4 @@
 gyro_1_x,gyro_1_y,gyro_1_z,accel_1_x,accel_1_y,accel_1_z,magnet_1_x,magnet_1_y,magnet_1_z,gyro_2_x,gyro_2_y,gyro_2_z,accel_2_x,accel_2_y,accel_2_z,magnet_2_x,magnet_2_y,magnet_2_z,gyro_3_x,gyro_3_y,gyro_3_z,accel_3_x,accel_3_y,accel_3_z,magnet_3_x,magnet_3_y,magnet_3_z
-gx1,gy1,gz1,ax1,ay1,az1,0,0,0,gx2,gy2,gz2,ax2,ay2,az2,0,0,0,0,0,0,0,0,0,0,0,0
 -146,-5,-231,344,656,16048,0,0,0,5600,-265,51,972,248,16320,0,0,0,0,0,0,0,0,0,0,0,0
 -112,-6,-221,344,672,16052,0,0,0,5559,-249,42,1032,348,16388,0,0,0,0,0,0,0,0,0,0,0,0
 -129,-1,-226,340,540,16096,0,0,0,5591,-251,60,1096,300,16356,0,0,0,0,0,0,0,0,0,0,0,0
