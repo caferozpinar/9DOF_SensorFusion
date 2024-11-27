@@ -1,0 +1,1 @@
+gyro_1_x,gyro_1_y,gyro_1_z,accel_1_x,accel_1_y,accel_1_z,magnet_1_x,magnet_1_y,magnet_1_z,gyro_2_x,gyro_2_y,gyro_2_z,accel_2_x,accel_2_y,accel_2_z,magnet_2_x,magnet_2_y,magnet_2_z,gyro_3_x,gyro_3_y,gyro_3_z,accel_3_x,accel_3_y,accel_3_z,magnet_3_x,magnet_3_y,magnet_3_z
