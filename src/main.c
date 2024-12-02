@@ -4,30 +4,39 @@
 #include "RotateCube.h"
 #include "SensorFusion.h"
 
+#define SLEEP_TIME_US 30000 // 30 ms uyku süresi
+
 int main(int argc, char *argv[]) {
+    // Girdi doğrulaması
     if (argc < 2) {
-        printf("Usage: %s <sensor_bitmap>\n", argv[0]);
-        return 1;
+        fprintf(stderr, "Usage: %s <sensor_bitmap>\n", argv[0]);
+        return EXIT_FAILURE;
     }
 
+    // Sensör bitmapini al ve doğrula
     int sensor_bitmap = strtol(argv[1], NULL, 2); // 9 bitlik sensör bitmapini al
     if (sensor_bitmap < 0 || sensor_bitmap > 0b111111111) {
-        printf("Error: Sensor bitmap must be a 9-bit binary value (0-0b111111111).\n");
-        return 1;
+        fprintf(stderr, "Error: Sensor bitmap must be a 9-bit binary value (0-0b111111111).\n");
+        return EXIT_FAILURE;
     }
 
+    // Veri dosyasını aç
     FILE *file = fopen("./Data/GY521_SensorDataSampleFormatted.csv", "r");
     if (file == NULL) {
-        printf("Error: Unable to open the file.\n");
-        return 1;
+        perror("Error: Unable to open the file");
+        return EXIT_FAILURE;
     }
 
+    // Değişken tanımlamaları
     char line[1024]; // Daha büyük buffer çünkü satır uzun
-    float gyro[3][3], accel[3][3], mag[3][3]; // Maksimum 3 sensör için dizi
+    float gyro[3][3] = {0}, accel[3][3] = {0}, mag[3][3] = {0}; // Maksimum 3 sensör için dizi
     CubeRotation rotation = {0.0f, 0.0f, 0.0f}; // Tek birleşik dönüşüm hesaplanacak
 
+    // Başlatma işlemleri
+    init_sensor_fusion();
     init_rotate_cube(argc, argv, &rotation);
 
+    // Dosya satırlarını oku ve işle
     while (fgets(line, sizeof(line), file)) {
         // Tüm sensörlerin verilerini ayrıştır
         sscanf(line,
@@ -53,10 +62,11 @@ int main(int argc, char *argv[]) {
         // Roll, pitch ve yaw değerlerini güncelle
         update_rotation(rotation);
 
-        // Bekleme süresi (100 ms)
-        usleep(30000);
+        // Bekleme süresi
+        usleep(SLEEP_TIME_US);
     }
 
+    // Dosyayı kapat
     fclose(file);
-    return 0;
+    return EXIT_SUCCESS;
 }
